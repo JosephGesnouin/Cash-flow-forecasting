@@ -1,290 +1,327 @@
-# Workshop — 45 minutes, 1 operator on a phone, 30 treasurers in the room
+# Workshop — 45 minutes, 2 facilitators, 30 treasurers in the room
 
-> Goal: have 30 junior treasurers leave the room saying *"I can do this on
-> my phone on Monday morning."* The hard constraint: only **one** Claude
-> Code access, on the facilitator's phone. No teams, no parallel laptops.
-> Engagement has to come from elsewhere.
+> Goal: every treasurer leaves saying *"I can do this on my phone on
+> Monday morning."* The constraint: only **one** Claude Code access, on a
+> phone. No team laptops. The asset: **two** facilitators in the room
+> sharing the load — one runs the audience, one drives the phone.
 
-This is the **solo-operator** format. A separate plan would apply if you had
-6 laptops and could split into teams; that earlier version is in git
-history.
-
----
-
-## 1. The constraint, reframed as a feature
-
-**One operator, 30 spectators** is usually death by passivity. But it has
-two things going for it:
-
-1. **The audience is the prompt-writer, collectively.** They're not watching
-   a pre-recorded demo — they decide what gets built next, in real time.
-   That's the entire pedagogy: *the human in "human-in-the-loop" is them*.
-2. **The phone constraint is the message.** If the lesson is "AI lets a
-   non-developer ship treasury tools fast", then doing it on a phone in
-   front of them proves the point harder than any laptop demo would. They
-   recognise the tool — it's the same phone they use for emails.
-
-So the format is built around **continuous audience involvement** through
-four mechanisms (§4), and the phone is on stage, not hidden.
+This document is the operating manual for both facilitators. Read it once
+each, then rehearse together (§4).
 
 ---
 
-## 2. Setup — what has to be true 30 minutes before kick-off
+## 1. The setup, in one sentence
 
-Hard requirements:
+A **Host** holds the microphone and owns the room. An **Operator** holds
+the phone and owns the code. Between them, the audience steers a single
+Claude Code session live — no spectator passivity, no team-laptop chaos.
 
-- The operator's phone **mirrors to the room screen** (HDMI dongle, AirPlay,
-  Chromecast — tested at least once before the day).
-- The repo is **already cloned** on the phone (Claude Code on iOS / Android,
-  authenticated, working directory set to the project root).
-- `python data/generate_data.py` and `streamlit run app.py` have **already
-  been validated** earlier the same day — running on a small cloud VM
-  (Streamlit Cloud / Hugging Face Spaces / Render) that the phone hits via
-  browser. The phone shouldn't try to run Streamlit locally.
-- A **second screen** in the room shows the live Streamlit app. So the
-  audience sees: code prompt on one screen, app refreshing on the other.
-- A **live poll system** is set up — Slido, Mentimeter, or a Google Form
-  with a QR code projected from the start. The QR code is on a slide and
-  visible during the whole session.
-- The operator has a **wired microphone** (a phone screen + a soft voice
-  loses the back rows in 90 seconds).
-- A **facilitator** (different person from the operator) runs the room:
-  reads polls, calls volunteers, keeps time. The operator focuses on the
-  phone.
+---
 
-**T-30 minute checklist** (printed on a card the operator carries):
+## 2. The two roles, sharply defined
+
+The single most important thing in this workshop is that the Host and the
+Operator **do not step on each other**. The split below is non-negotiable
+during the live session — discussions happen during rehearsal, not on
+stage.
+
+### 2.1 The HOST
+
+Owns: the **room**, the **clock**, the **polls**, the **narrative**.
+
+Responsibilities:
+
+- Holds the wireless microphone for the entire 45 minutes.
+- Delivers the opening pitch (§9) and the closing 60 seconds (§16).
+- Pushes each live poll on the projected screen (Slido / Mentimeter) and
+  reads results aloud.
+- Calls predict-then-watch shows of hands ("who thinks this prompt
+  succeeds first try?").
+- Recruits and brings up Round 2 volunteers.
+- **Owns the countdown timer**. Calls "30 seconds left" on every block.
+  Cuts the Operator if they overrun.
+- Narrates what the Operator is doing for the audience: *"You can see
+  Claude is opening `metrics.py` first — it found the existing aging
+  function and is going to extend it."*
+- Picks the Round 3 stump-the-AI prompt from audience submissions.
+- Distributes the take-home memo at minute 40.
+
+The Host **never** touches the phone. **Never** types a prompt. **Never**
+debugs.
+
+### 2.2 The OPERATOR
+
+Owns: the **phone**, the **Streamlit app**, the **prompts**, the **diffs**.
+
+Responsibilities:
+
+- Holds the phone with Claude Code authenticated, working dir in the repo.
+- Types every prompt verbatim (in Round 2, dictation from volunteers).
+- **Reads the diff aloud** before accepting any change. *"It's editing
+  `app.py`, line 47, adding a new metric call. Looks right. Accepting."*
+- Hits accept / reject visibly. The audience sees the gesture.
+- Refreshes the Streamlit app on the right screen after each accept and
+  describes what changed.
+- Catches errors and decides in 30 seconds: re-prompt or move on.
+- Maintains the **prompt menu** (printed) and reads from it for Round 1
+  pre-written prompts.
+- During the Host's narration breaks, **silently pre-stages the next
+  prompt** in the input box (does not press Enter).
+
+The Operator **never** speaks while the Host is talking, except to read
+diffs aloud or announce a result. Two voices simultaneously kills
+audibility.
+
+### 2.3 Cheat sheet (printed, one per facilitator)
 
 ```
-[ ] Phone connected to room screen, mirroring works
-[ ] Streamlit app reachable on second screen
-[ ] Claude Code session live, last test prompt executed cleanly
-[ ] QR code for live poll on opening slide
-[ ] Microphone on, levels checked
-[ ] Timer visible (35-min countdown when construction starts)
-[ ] Take-home memo printed × 30
+HOST                                  OPERATOR
+─────────────────────────────         ─────────────────────────────
+Mic, clock, polls, narrative.         Phone, code, diffs, app.
+
+YOU SAY:                              YOU SAY:
+- The opening / closing pitches.      - "Reading the diff: <what>."
+- "30 seconds left."                  - "Accepting." / "Rejecting."
+- "Show of hands — predict?"          - "App is reloading."
+- "We have a winner: option B."       - "Done — feature is live."
+- Volunteer call-ups.                 - "Need 60 more seconds."
+
+YOU DO NOT:                           YOU DO NOT:
+- Touch the phone.                    - Touch the microphone.
+- Type prompts.                       - Run polls.
+- Debug code.                         - Manage the clock.
+- Fix bugs on stage.                  - Speak during Host narration
+                                        (except diffs / results).
 ```
 
 ---
 
-## 3. The 45-minute breakdown
+## 3. Coordination signals (silent, on stage)
 
-| Min | Block | Lead | What happens |
-|-----|-------|------|--------------|
-| 00–04 | **Frame & ground rules** | Facilitator | Pitch (script in §6). QR code shown — everyone joins the live poll right now. |
-| 04–09 | **Anchor demo** | Operator | One single, low-stakes prompt run live to show "the loop": prompt → diff → accept → app updates. Picks a deliberately clear win (§7, demo prompt). |
-| 09–22 | **Round 1: audience as Product Owner** | Both | 13 min. Audience picks the next feature from a 4-option menu via live poll. Operator builds the winner. Continuous narration. |
-| 22–32 | **Round 2: hot-seat prompt-craft** | Both | 10 min. 3 volunteers come to the front, **dictate** their prompts for the same small task. Operator types each. Audience scores via poll. |
-| 32–40 | **Round 3: stump the AI** | Both | 8 min. Audience submits free-text feature ideas via the form. Facilitator picks the gnarliest. Operator runs it. Show the failure modes too. |
-| 40–45 | **Debrief & memo** | Facilitator | 5 min. Live poll: what did you learn? Distribute take-home memo. Last word from operator. |
+The Host and Operator agree on six gestures during rehearsal so they can
+coordinate without breaking the room's attention.
 
-**Time discipline**: the facilitator owns the clock, not the operator.
-Operator is allowed to say *"I want 90 more seconds"*, but only if the
-facilitator agrees. If we're behind, we cut Round 3, never Round 1 (it's
-the most engagement per minute).
+| Signal | From | To | Meaning |
+|--------|------|------|---------|
+| 👍 thumb up | Operator | Host | "Ready to run / accepted, move on." |
+| ✋ palm up | Operator | Host | "Buy me 30 seconds — I'm reading the diff." |
+| ✋ palm down | Operator | Host | "I'm bailing on this prompt, please redirect." |
+| 👇 finger to clock | Host | Operator | "You're at 90 seconds left." |
+| ✊ fist tap | Host | Operator | "Skip ahead — we cut the rest." |
+| 🤙 phone gesture | Either | Either | "Mic / phone glitch — give me a moment." |
 
----
-
-## 4. The four engagement mechanisms
-
-These run **continuously** in the background of the three rounds. They turn
-"30 people watching one phone" into "30 people steering one phone".
-
-### 4.1 Live poll (always on)
-
-A QR code on the screen leads to a single Slido / Mentimeter event.
-Throughout the session, the facilitator pushes 5–6 polls:
-
-- **Round 1 menu** (4 options, multiple choice, 60-second window).
-- **Hot-seat scoring** (3 prompts × 3 axes: clarity / specificity / did-it-work).
-- **Stump-the-AI submissions** (open text, audience upvotes).
-- **Final retro** (1-question slider: *"how confident am I to try this on
-  Monday?"* on a 1–10 scale).
-
-A poll every ~7 minutes is the rhythm. Less than that and the back rows
-disengage; more and it becomes mechanical.
-
-### 4.2 Predict-then-watch
-
-Before the operator hits Enter on each prompt, the facilitator asks the
-room out loud:
-
-> *"Show of hands — who thinks this prompt will succeed first try?"*
-
-Then the prompt runs. The audience either celebrates the prediction or
-laughs at the failure. **It costs 8 seconds and turns every prompt into a
-shared bet.** The whole room watches the diff because they have skin in the
-game.
-
-### 4.3 The AI-watch scorecard
-
-A printed A6 card on each chair, ticked silently:
-
-```
-AI-WATCH SCORECARD                Name: ____________
-
-   [ ] One prompt succeeded first try
-   [ ] One prompt needed re-prompting
-   [ ] One prompt produced a real bug we caught
-   [ ] One feature changed my mind about what's possible
-   [ ] One thing the AI did better than I expected
-   [ ] One thing the AI did worse than I expected
-
-What I'll prompt myself on Monday:
-   _________________________________________________
-```
-
-The card gives shy participants a way to be active without speaking. The
-last line is the **only** deliverable that matters: it's their commitment.
-
-### 4.4 The hot-seat (Round 2)
-
-The single piece of "performance" in the session. Three volunteers come to
-the mic and dictate their prompts for the same task. Operator types
-verbatim. The room sees prompt quality drive output quality, side by side.
-This is the moment that shifts treasurers from *"AI is magic"* to *"AI is
-a tool I write specifications for"*.
+These are practiced in rehearsal until they're reflexive.
 
 ---
 
-## 5. Choosing the room screen layout
+## 4. The 45-minute joint rehearsal (the day before)
 
-The dual-screen layout is non-negotiable. Suggestion:
+Block 45 minutes the day before the workshop. Both facilitators in a quiet
+room, the actual phone, the actual screen-mirror dongle.
+
+| Min | Activity |
+|-----|----------|
+| 00–05 | Read this document together. Agree on signals (§3). |
+| 05–10 | Test screen mirroring. Test microphone. Test the Streamlit URL. |
+| 10–25 | Operator runs the **anchor demo prompt** (§10). Host narrates as if 30 people were watching. Time it. Tighten. |
+| 25–35 | Operator runs **two of the four Round-1 prompts** end-to-end. Host runs a fake poll on their phone, narrates, calls the predict-then-watch. Notice every place where you talked over each other. |
+| 35–40 | Practise the volunteer call-up: Host pretends to call "Marie", brings them up, hands them the mic. Operator types a dictated prompt. Find the awkwardness. |
+| 40–45 | Debrief. Agree on the cuts: which Round-1 option is too risky to leave on the menu? Which prompt needs to be pre-cached on the phone? |
+
+If the rehearsal is skipped, the workshop will be 70% as good. The two of
+you have to look like a band, not two soloists.
+
+---
+
+## 5. T-30 minute checklist (split by role)
+
+Both arrive in the room 30 minutes before kick-off.
+
+**HOST setup**
+
+- [ ] Microphone tested at the back of the room
+- [ ] Slido / Mentimeter event open, QR code on the opening slide
+- [ ] Countdown timer on the slide deck (5 / 13 / 10 / 8 / 5 minute blocks)
+- [ ] Take-home memos counted (×30) and stacked at the door
+- [ ] Round 1 menu slide loaded (4 options, one per quadrant)
+- [ ] Round 3 audience-input form open, QR ready on a separate slide
+
+**OPERATOR setup**
+
+- [ ] Phone connected to room screen, **mirroring tested with audience seats**
+- [ ] Claude Code open, working dir in the repo, last test prompt clean
+- [ ] Streamlit URL bookmarked on the second screen, app reachable
+- [ ] Pre-written prompt menu printed and on the lectern
+- [ ] Phone on charger that reaches the operator's seat
+- [ ] Wifi + 5G hotspot both active, hotspot tested as fallback
+- [ ] Notifications muted on the phone (do not skip — incoming WhatsApps on
+      a mirrored screen are a session-ender)
+
+**JOINT verification (10 min before doors open)**
+
+- [ ] Host runs one fake poll, Operator votes — the poll updates on screen
+- [ ] Host calls a fake volunteer ("come up here"), Operator hands them
+      the mic from the other side of the stage — confirm the choreography
+      works
+- [ ] Operator runs the anchor demo prompt one more time. Host narrates.
+      If anything feels rough, fix it now.
+
+---
+
+## 6. Room layout
 
 ```
 ┌──────────────────────────────┬──────────────────────────────┐
 │                              │                              │
 │   PHONE MIRROR               │   STREAMLIT APP              │
-│   (Claude Code,              │   (live Helios dashboard)    │
-│    prompt + diff)            │                              │
-│                              │                              │
+│   (Claude Code,              │   (live Helios dashboard,    │
+│    prompt + diff)            │    auto-refresh)             │
 │                              │                              │
 └──────────────────────────────┴──────────────────────────────┘
        ┌────────────────────────────────────────────┐
        │   POLL SLIDE / QR CODE / TIMER             │
+       │   (driven by the Host's laptop)            │
        └────────────────────────────────────────────┘
+
+          [ HOST ]         [ AUDIENCE 30 ]         [ OPERATOR ]
+            mic                                       phone
 ```
 
-If only one big screen is available, split it 60/40 — phone mirror left,
-Streamlit app right. Polls go on the facilitator's laptop screen at the
-front of the room.
+The Host stands stage-left near the laptop. The Operator sits stage-right
+with the phone, screen mirroring already running. The two should be visible
+simultaneously but not within typing distance — the audience needs to see
+two people, not one person with a sidekick.
 
 ---
 
-## 6. Opening pitch (4 minutes — script)
+## 7. The 45-minute matrix (who does what, every minute)
+
+| Min | Block | HOST does | OPERATOR does |
+|-----|-------|-----------|----------------|
+| 00–04 | Frame & rules | Delivers opening pitch (§9). Shows QR. Confirms poll registrations on screen. | Sits visibly with phone on mirror. Stays silent. Pre-stages the anchor prompt in the input box (does not press Enter). |
+| 04–09 | Anchor demo | At minute 4, says: *"Operator, run the anchor."* Calls predict-then-watch ("succeeds first try?"). Narrates as Claude works. | Reads anchor prompt aloud. Hits Enter. Reads diff aloud. Accepts. Refreshes Streamlit. Says: *"Done — new KPI is live."* |
+| 09–10 | Round 1 setup | Shows the 4-option menu slide. Reads each option in 15 seconds. Launches the 60-second poll. | Pulls the matching pre-written prompt for each option to top of stack. Stays silent. |
+| 10–11 | Round 1 vote | Reads countdown ("30 seconds left to vote"). Announces the winner. | Locates the winner's prompt on the printed menu. Loads it into the input box. |
+| 11–18 | Round 1 build | Predict-then-watch. Narrates Claude's actions ("opening `metrics.py`…"). Calls clock at 60 sec & 30 sec marks. | Hits Enter. Reads diff aloud at every step. Accepts / rejects visibly. Refreshes app. |
+| 18–22 | Round 1 review | Asks one open question to the room: *"What would you change about this feature?"* Takes 2 verbal answers. | Stays at the phone, ready. If the audience's feedback is small, runs an instant tweak prompt. |
+| 22–24 | Round 2 setup | Calls 3 pre-recruited volunteers up to the front. Hands first volunteer the mic. Explains the task. | Resets the prompt input. Says *"Ready when you are."* |
+| 24–32 | Round 2 hot-seat | After each volunteer dictates: launches the 30-sec scoring poll (clarity / specificity / did-it-work). Calls the next volunteer. | Types each prompt verbatim. Reads diff aloud. Accepts / rejects. Reports outcome briefly. |
+| 32–34 | Round 3 setup | Pushes the audience-input form QR. Reads the top 5 submissions aloud. Picks one. | Stays at the phone, scans the form on a side screen too — flags any that's clearly impossible. |
+| 34–40 | Round 3 build | Narrates. Manages clock tightly — says *"three minutes left"*, then *"one minute"*. | Runs the prompt. If it fails, re-prompts once. Then narrates the failure honestly. |
+| 40–43 | Debrief | Distributes the memo. Pushes the final retro poll (Monday-confidence 1–10 + free text). Reads a few free-text answers aloud. | Closes Claude Code. Brings the Streamlit app full-screen on the main screen. Stands next to the Host. |
+| 43–45 | Closing | Delivers the closing 60 seconds (§16). | Silent, beside the Host, dashboard glowing on the screen behind them. |
+
+This matrix is the source of truth. Print it. Stick it under the Host's
+laptop and on the Operator's lectern.
+
+---
+
+## 8. The four engagement mechanisms (recap)
+
+These are the Host's tools to keep 30 spectators active. The Operator
+supports each but does not run any of them.
+
+1. **Live poll** every 6–7 minutes. QR code visible from minute 0. The
+   Host pushes each poll on the laptop screen.
+2. **Predict-then-watch** before every prompt that runs. The Host says:
+   *"Show of hands — succeeds first try? … now let's see."* The Operator
+   waits for the Host's "go" before pressing Enter.
+3. **AI-watch scorecard** (printed A6, one per chair). The Host mentions
+   it twice — once at minute 4, once at minute 25. Spectators tick boxes
+   silently as the session unfolds.
+4. **Hot-seat performance** (Round 2). Three volunteers, three prompts,
+   three different outcomes. The single most memorable moment of the day.
+
+---
+
+## 9. Opening pitch (HOST script — 4 minutes)
 
 > *"Welcome. In front of you: a treasury app for a fictional industrial
-> group. €38M of open AR, €13M of open AP, eight bank accounts in three
-> currencies, a 13-week forecast, three stress scenarios. It was built in
-> two hours by an AI that I controlled by typing what I wanted."*
+> group — Helios Industries. Eight bank accounts in three currencies. €38
+> million of open AR, €13 million of open AP. A 13-week direct cash
+> forecast. Three stress scenarios. The whole thing was built in two
+> hours by an AI controlled by a human typing what they wanted."*
 >
-> *"Here's what's different about today: I will not show you a polished
-> demo. I will let you decide what to build next, on my phone, in real
-> time. Three rounds. You will pick the features. You will score the
-> prompts. You will throw the AI off a cliff in round three. I am the
-> typist. You are the product owner."*
+> *"Today is not a demo. We are two facilitators. My colleague has the
+> phone — that's our entire development team. I have the microphone —
+> that's the management. **You** are the product owners. For the next 40
+> minutes, you decide what gets built next, you score the prompts, and
+> in Round 3 you'll throw the AI off a cliff."*
 >
-> *"Three ground rules:*
-> *— Specific beats clever. 'Add a chart' is a bad prompt. 'Add a
->    horizontal bar chart on the AR page showing top-five customers by
->    open balance, in EUR' is a good one.*
-> *— Watch the diff. The AI is wrong about 1 time in 5. We accept nothing
->    blind.*
-> *— You scan this QR code now."* (point to it)
+> *"Three rules:*
+> *— **Specific beats clever.** 'Add a chart' is a bad prompt. 'On the
+>    Receivables page, add a horizontal bar chart of the top-five customers
+>    by open EUR balance' is a good one.*
+> *— **We watch the diff.** Every change is read out loud before accepting.
+>    The AI is wrong about one time in five.*
+> *— **You scan this QR code now.**"* (point at the QR slide)
 
-The pitch is precisely 4 minutes. Time it once before the day. Trim ruthlessly.
+The Host then pauses for 30 seconds while the audience scans. The Operator
+uses this pause to confirm the prompt is loaded. At minute 4, the Host
+says: *"Operator, anchor."*
 
 ---
 
-## 7. The prompt sequence (with backups)
+## 10. The prompt sequence (printed menu for the OPERATOR)
 
-The operator carries a printed prompt menu. Here's the canonical sequence;
-the facilitator can swap any item if the audience steers somewhere else.
-
-### Anchor demo prompt — 4 minutes (always run this one)
+### Anchor demo prompt — minute 4 to 9
 
 > *"In `app.py`, add a 9th KPI card called 'AR overdue %'. It shows the
 > share of open AR (in EUR) where `due_date` is before today, divided by
 > total open AR. Display as a percentage with one decimal. Colour the
-> value red if > 15%, otherwise default. Use `src.metrics.aging_buckets`
-> if helpful."*
+> value red if > 15%, otherwise default. Reuse `src.metrics.aging_buckets`
+> if it helps."*
 
-Why this prompt: small surface, visible result, uses an existing function,
-has a clear pass/fail. The audience sees the dashboard reload with a new
-red number. Confidence anchored.
+### Round 1 menu — pick by audience vote (one of four)
 
-### Round 1 menu (4 options for live vote — pick one to build)
+| Code | Prompt menu item the Host reads aloud | Pre-written prompt the Operator runs |
+|------|----------------------------------------|----------------------------------------|
+| **A** | *"Heatmap of expected receipts by week × day"* | *"In `pages/1_Forecast.py`, add a heatmap above the line chart, showing the sum of expected AR receipts in EUR per (week, weekday) cell, for the next 4 weeks. Use plotly's `imshow`. Title: 'Expected receipts heatmap (next 4 weeks)'. Use `dl.load_ar()`, filter status == 'Open'."* |
+| **B** | *"M&A simulator slider"* | *"In `pages/1_Forecast.py`, add to the sidebar a number_input 'Acquisition (€M)' default 0, range 0–50, step 1, and a date_input 'Acquisition date' between today and end of horizon. If amount > 0, append a single forecast line with category 'M&A (simulated)' and amount = -value*1e6 on the chosen date. Trajectory and min-balance must reflect it."* |
+| **C** | *"Bank-fee anomaly detector"* | *"Create a new page `pages/7_Anomalies.py`. Detect transactions where category == 'Bank Fees' and abs(amount_eur) > 1.5 × the trailing 12-month rolling mean of Bank Fees. Show: a count KPI of anomalies, a sortable dataframe, and a timeline scatter where anomalies are red, normal points are blue. Use `dl.load_transactions()` and follow the style of `pages/3_Receivables_Payables.py`."* |
+| **D** | *"Customer concentration risk score"* | *"In `src/metrics.py`, add `customer_concentration(ar)` returning a dict {'herfindahl': float, 'top3_share': float} computed on Open AR. In `pages/3_Receivables_Payables.py` Receivables tab, show two new KPIs above the aging chart: 'Concentration HHI' and 'Top-3 share' — colour the top-3 KPI red if > 0.40."* |
 
-| Option | Headline | Why it's a good choice |
-|--------|----------|-------------------------|
-| **A** | Heatmap of expected receipts | Visual, on the Forecast page, 8 minutes of work |
-| **B** | M&A simulator slider | Interactive, shows direct impact on closing balance |
-| **C** | Bank-fee anomaly detector | New page, shows AI handling a "find outliers" prompt |
-| **D** | Customer concentration score (Herfindahl + top-3 share) | Treasury-relevant, fits in 8 minutes, opinionated risk threshold |
+### Round 2 hot-seat task
 
-The facilitator reads each option in 30 seconds. Poll runs 60 seconds. The
-winner gets built in 8 minutes. The operator carries a pre-written prompt
-for **all four** so there's no on-the-fly authoring stress.
+The Host announces:
 
-Example pre-written prompt for option **D**:
+> *"Task: add a button on the Forecast page that exports the current
+> 13-week forecast lines as CSV. Three volunteers, each will dictate
+> their own prompt for this exact same task. We will see three different
+> outcomes."*
 
-> *"In `src/metrics.py`, add a function `customer_concentration(ar)` that
-> returns a dict with `herfindahl` (sum of squared customer shares of open
-> AR) and `top3_share` (share of the three largest open-AR customers).
-> Then in the Receivables tab of `pages/3_Receivables_Payables.py`, show
-> two new KPIs above the aging chart: 'Concentration HHI' and 'Top-3
-> share'. Colour the top-3 share red if > 0.40."*
+The Operator types verbatim. After each, the Host runs a 30-second poll.
 
-### Round 2 hot-seat task (3 volunteers each prompt this)
+### Round 3 stump the AI
 
-The same task is set, three different prompts.
+The Host opens an audience submission form and reads the top 5 upvoted
+prompts. Picks the one with the best mix of *meaningful + tractable in 6
+minutes*. Examples that have worked well:
 
-> Task announced to the room: *"Add a button on the Forecast page that
-> exports the current 13-week forecast lines as CSV."*
+- *"Add a Slack notification when DSO drifts more than 5 days."*
+- *"Project the cash position 24 months out and tell us when we run out
+  of RCF."*
+- *"Make all the charts colour-blind safe."*
 
-Volunteers come up one at a time, dictate their prompt, the operator types
-it verbatim, hits Enter, audience watches the result, scores via poll, next
-volunteer.
-
-This deliberately tests: did they specify the file? did they specify the
-column ordering? did they specify the file name? Three different prompts
-will produce three different outcomes — the comparison is the lesson.
-
-### Round 3 — "stump the AI"
-
-Audience submits free-text feature ideas via the form. Facilitator surfaces
-the 5 most-upvoted, picks the gnarliest one that fits in ~8 minutes.
-Examples of the kind of prompts that have shown up in similar workshops:
-
-- *"Project the cash position 2 years out and show when we run out of
-  RCF."* (Hard: requires extrapolating revenue trend, calibrating decay,
-  hitting the RCF limit logic.)
-- *"Add a Slack notification when DSO drifts more than 5 days."* (Hard:
-  needs an external service, the AI will likely stub it — good teaching
-  moment about dependencies.)
-- *"Replace all charts with prettier ones."* (Hard for the right reasons:
-  vague. Operator should reject the prompt and ask the audience to
-  rewrite it. Pedagogically valuable.)
-
-The win condition for Round 3 is **not** that the feature works perfectly —
-it's that the audience sees the AI struggle, iterate, and eventually
-deliver something. Failure-on-stage is the most under-used teaching
-moment in AI demos.
+If a prompt is clearly impossible (e.g. *"connect to our real ERP"*), the
+Host says so out loud and picks the next one — *"that one's a great
+question for our follow-up workshop on real data integration"*.
 
 ---
 
-## 8. The take-home memo (printed × 30)
+## 11. Take-home memo (printed × 30, distributed at minute 40)
 
-A single A5 card, given out at minute 40:
+Single A5 card. Same on both sides if you want a chair-back card.
 
 ```
 VIBE CODING FOR TREASURERS — THE 5 REFLEXES
 
-1. SCOPE       One feature per prompt. One file. One acceptance test.
+1. SCOPE       One feature per prompt. One file. One test.
 2. ANCHOR      Always name the exact file to modify.
 3. DATA-FIRST  State the columns, the units, the period.
 4. TEST        Define the acceptance criterion BEFORE prompting.
 5. ITERATE     The AI is wrong 1 time in 5. Read the diff.
-               Re-prompt; don't accept blind.
+               Re-prompt; never accept blind.
 
 THE PROMPT TEMPLATE
 ───────────────────
@@ -295,57 +332,77 @@ Style: follow <reference file>.
 
 WHAT TO TRY ON MONDAY
 ─────────────────────
-On your own dataset (even an Excel export):
-1. Generate 24 months of synthetic data with one prompt.
-2. Build a Streamlit dashboard with a second prompt.
-3. Stop. That's the demo. Iterate from there.
+Pick one repetitive task you do every week.
+Open Claude on your phone tomorrow morning.
+Apply the five reflexes.
+Show us what you built next month.
 ```
 
-This card is the artefact that survives the session. Everything else is
-ephemera.
+---
+
+## 12. Risks and plan B (split by role)
+
+| Risk | Likelihood | HOST's recovery move | OPERATOR's recovery move |
+|------|------------|----------------------|----------------------------|
+| Phone mirroring breaks | Medium-high | Bridge with a story for ~60 sec ("while we sort this out, who's already used Claude on their phone?") | Reset the cable / restart mirroring; if it doesn't recover in 90 sec, switch to laptop SSH backup |
+| Wifi drops mid-prompt | Medium | Run the predict-then-watch poll on a slower cadence to fill time | Switch to 5G hotspot |
+| One prompt eats 6 minutes | High | Call out the timer hard at 3 min: *"Operator, status?"* | Say "I'm bailing" out loud and explain why — turn it into a teaching moment |
+| Volunteer freezes at the mic | Medium | Take the mic back, model it: *"if I were them I'd say…"*, then hand back | Be ready to type a Host-suggested prompt instead |
+| Audience disengages in Round 2 | Medium | Make the scoring poll mandatory, push the QR even harder | Read every diff slowly, theatrically — slow down, don't speed up |
+| AI produces something insecure / weird | Low | Pause: *"Operator, what did you see?"* Let the Operator narrate. Use the moment to drive home reflex #5. | Reject visibly. Say *"that's wrong because <X> — re-prompting"*. Next prompt addresses what was wrong. |
+| Both facilitators sick / phone dies | Low | Plan B: facilitator narrates a pre-recorded screencast of the same flow, polls still run. The session still delivers the memo. | — |
 
 ---
 
-## 9. Risks and plan B
+## 13. Success criteria
 
-| Risk | Likelihood | Mitigation |
-|------|------------|------------|
-| Phone screen mirroring fails | Medium-high | Pre-tested twice. Fallback: facilitator's laptop SSHes into a hosted Claude Code session on a tablet, audience watches that screen instead. |
-| Wifi drops mid-prompt | Medium | Pre-cache the most likely 6 prompts on the phone. Use a 5G hotspot as backup. |
-| One prompt eats 6 minutes | High | Operator must say *"I'm cutting this"* aloud at 3 min and explain why. Showing how to abort is part of the lesson. |
-| Audience disengages in Round 2 | Medium | Hot-seat scoring poll is mandatory; facilitator moves the room to vote actively. |
-| Volunteers don't come up | Medium | Facilitator pre-recruits 5 candidates during the coffee break. Never ask the room cold. |
-| AI produces something unsafe / weird | Low | Operator always reads the diff aloud before accepting. If it's weird, REJECT on stage — this is the best teaching moment of the day. |
-| The whole thing falls flat | Low | Plan B: facilitator narrates a pre-recorded screencast of the same flow, polls still run. The session still delivers the memo. |
-
----
-
-## 10. Success criteria
-
-Measured in the final 5-minute debrief:
+Measured in the final 5 minutes. The two facilitators evaluate jointly
+right after the room empties.
 
 1. **At least 4 prompts have been executed and accepted**, with visible
    results in the Streamlit app.
 2. **At least 1 prompt has failed on stage**, been re-prompted, and
-   eventually succeeded — making the failure mode tangible.
+   eventually succeeded.
 3. **The "Monday confidence" poll averages ≥ 7 / 10**.
 4. **At least 5 take-home memos** come back with the "what I'll try on
    Monday" line filled in (collected at the door).
-5. **At least 3 questions in the debrief** are about extending to real
-   data (MT940, ERP, etc.) — signal that they're already past the demo
-   and into operationalisation.
+5. **At least 3 questions** in the debrief are about extending to real
+   data — signal that the audience is past the demo and into
+   operationalisation.
+
+If you hit 4/5 of these, the workshop worked. Pitch the follow-up
+session before they leave the room.
 
 ---
 
-## 11. What you say in the last 60 seconds
+## 14. The closing 60 seconds (HOST script — minute 44)
 
-> *"You did not watch a demo today. You ran a development team. The phone
+> *"You did not watch a demo. You ran a development team. The phone
 > typed, but you specified, you scored, you steered, you rejected. The
 > only thing that changes on Monday morning is that the phone in your
-> pocket is mine, but the brain doing the steering is yours. Pick one
-> repetitive treasury task you do every week. Open Claude on your phone
-> tomorrow morning. Apply the five reflexes. Show me what you built next
-> month."*
+> pocket is yours, but the brain doing the steering is the same."*
+>
+> *"Pick one repetitive treasury task you do every week. Open Claude on
+> your phone tomorrow morning. Apply the five reflexes on your memo.
+> Show us what you built next month — we'll come back and ship the best
+> ones together."*
 
-Then the operator hands the room screen back to the dashboard, and the
-session ends on the working app — not on a slide.
+The Operator stands beside the Host, dashboard glowing on the main screen
+behind both of them. The session ends on the working app, not on a slide.
+
+---
+
+## 15. After the workshop (the two of you, in private, within 24h)
+
+A 20-minute joint debrief, while it's fresh:
+
+- Which prompt landed best? Which failed worst?
+- Where did the choreography break? (Talked over each other? Missed a
+  signal? Volunteer flow awkward?)
+- Which 3 audience questions deserve a follow-up workshop?
+- Pick the **one** feature from the day that's worth merging into the
+  main repo. Open a PR before the end of the week — the audience will
+  remember.
+
+Leave a `RETRO.md` in `docs/` with the answers. The next time you run
+this session — and you will — your future selves will thank you.

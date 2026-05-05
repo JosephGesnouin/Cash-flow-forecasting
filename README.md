@@ -101,10 +101,12 @@ The app pages are auto-discovered from `pages/` and appear in the sidebar:
 │   └── assumptions.json         # Output: drivers + scenario knobs
 ├── docs/
 │   ├── PROJECT_REPORT.md        # English narrative of conversation + delivery
+│   ├── WORKSHOP.md              # 45-min vibe-coding session plan (FR)
 │   ├── METHODOLOGY.md           # Forecasting math
 │   ├── DATA_MODEL.md            # Field-by-field schema
 │   ├── USER_GUIDE.md            # Treasurer's walk-through
-│   └── dashboard.html           # Static preview (built by tools/)
+│   ├── dashboard.html           # Static preview (built by tools/)
+│   └── index.html               # Mirror for GitHub Pages
 ├── tools/
 │   └── build_html_dashboard.py  # Renders docs/dashboard.html
 └── requirements.txt

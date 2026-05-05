@@ -431,7 +431,12 @@ def main() -> None:
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(html, encoding="utf-8")
+    # Mirror to index.html so the repo is GitHub-Pages-ready out of the box
+    # (Settings → Pages → branch / docs).
+    INDEX = OUT.parent / "index.html"
+    INDEX.write_text(html, encoding="utf-8")
     print(f"Wrote {OUT.relative_to(ROOT)}  ({OUT.stat().st_size/1024:,.1f} KB)")
+    print(f"Wrote {INDEX.relative_to(ROOT)}  (mirror, GitHub-Pages landing page)")
 
 
 if __name__ == "__main__":

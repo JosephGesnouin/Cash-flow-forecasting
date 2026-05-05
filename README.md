@@ -44,13 +44,22 @@ Then open http://localhost:8501 .
 ### Static HTML preview (no Streamlit needed)
 
 ```bash
-python tools/build_html_dashboard.py     # writes docs/dashboard.html
+python tools/build_html_dashboard.py     # writes docs/dashboard.html (+ index.html mirror)
 ```
 
 A self-contained HTML file with the same KPIs and Plotly charts as the
 Streamlit dashboard, suitable for sharing with stakeholders who don't have
-Python installed. See [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md) for
-the full project narrative in English.
+Python installed. The same content is also written as `docs/index.html` so
+the repo can be served directly via **GitHub Pages**:
+
+> Repository → Settings → Pages → Source: branch
+> `claude/cash-flow-forecasting-app-3fl9v`, folder `/docs` → Save.
+> The demo will be live at
+> `https://<owner>.github.io/<repo>/dashboard.html` (or just the root URL,
+> which serves `index.html`).
+
+See [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md) for the full project
+narrative in English.
 
 The app pages are auto-discovered from `pages/` and appear in the sidebar:
 

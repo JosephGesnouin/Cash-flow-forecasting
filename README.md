@@ -41,6 +41,17 @@ streamlit run app.py
 
 Then open http://localhost:8501 .
 
+### Static HTML preview (no Streamlit needed)
+
+```bash
+python tools/build_html_dashboard.py     # writes docs/dashboard.html
+```
+
+A self-contained HTML file with the same KPIs and Plotly charts as the
+Streamlit dashboard, suitable for sharing with stakeholders who don't have
+Python installed. See [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md) for
+the full project narrative in English.
+
 The app pages are auto-discovered from `pages/` and appear in the sidebar:
 
 | # | Page | What it answers |
@@ -80,9 +91,13 @@ The app pages are auto-discovered from `pages/` and appear in the sidebar:
 │   ├── fx_rates.csv             # Output: daily FX vs EUR
 │   └── assumptions.json         # Output: drivers + scenario knobs
 ├── docs/
+│   ├── PROJECT_REPORT.md        # English narrative of conversation + delivery
 │   ├── METHODOLOGY.md           # Forecasting math
 │   ├── DATA_MODEL.md            # Field-by-field schema
-│   └── USER_GUIDE.md            # Treasurer's walk-through
+│   ├── USER_GUIDE.md            # Treasurer's walk-through
+│   └── dashboard.html           # Static preview (built by tools/)
+├── tools/
+│   └── build_html_dashboard.py  # Renders docs/dashboard.html
 └── requirements.txt
 ```
 

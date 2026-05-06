@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📘 Read the methodology doc first
+    url: https://github.com/josephgesnouin/Cash-flow-forecasting/blob/main/docs/METHODOLOGY.md
+    about: Most data questions are answered in the methodology doc.
+  - name: 📊 Read the data model first
+    url: https://github.com/josephgesnouin/Cash-flow-forecasting/blob/main/docs/DATA_MODEL.md
+    about: Field-by-field schema of every CSV.
+  - name: 📒 Read the README "Propose an update" section
+    url: https://github.com/josephgesnouin/Cash-flow-forecasting/blob/main/README.md#9-propose-an-update--file-a-github-issue
+    about: How to write an issue that ships in one round-trip.

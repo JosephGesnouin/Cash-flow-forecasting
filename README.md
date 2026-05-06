@@ -249,27 +249,59 @@ Full math is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
 ## 8. Your PO backlog — what to prioritise next
 
-Below is a ready-made backlog. Treat it as a starting point. Reorder it
-based on what your real treasury team would benefit from most, then turn
-the top two into proper user stories before your next meeting.
+Below is a ready-made backlog grouped by theme. Treat it as a starting
+point. Reorder it based on what your real treasury team would benefit
+from most, then turn the top two into proper issues (next section).
+
+Effort tags: **S** = under an hour for someone who knows the codebase ·
+**M** = half a day · **L** = full sprint or more.
+
+### 8.1 — Data integration (connecting to real life)
 
 | # | Feature | User story | Effort |
 |---|---------|-----------|--------|
-| 1 | **Bank statement ingestion** | *As a treasurer I want to import my bank's MT940/CAMT.053 file so the cash position reflects today's actual balances, not synthetic data.* | L |
-| 2 | **DSO drift alert** | *As a credit-control lead I want a banner alert when DSO exceeds target by 5 days so I can escalate before it becomes a runway issue.* | S |
-| 3 | **AR collection workflow** | *As a credit-control lead I want a per-customer "next action" column on the Receivables page so my collection team has a daily worklist.* | M |
-| 4 | **M&A simulator slider** | *As a CFO I want to test a one-off acquisition outflow on a chosen date and see the impact on my 13-week trajectory.* | S |
-| 5 | **Cash pooling simulation** | *As a group treasurer I want to see the consolidated cash position under a notional cash pool across the four EUR accounts.* | M |
-| 6 | **Forecast accuracy by category** | *As a treasurer I want a leaderboard of MAPE per category over the last 6 vintages so I know which assumptions are drifting.* | M |
-| 7 | **Customer concentration risk score** | *As a treasurer I want a Herfindahl index + top-3 share on open AR with a red-flag threshold so I monitor concentration risk.* | S |
-| 8 | **Bank fee anomaly detector** | *As a treasury controller I want any bank fee > 1.5x the trailing 12-month rolling average to be flagged automatically.* | S |
-| 9 | **PDF export for the CFO** | *As a treasurer I want a one-click "monthly board pack" PDF with the headline KPIs and the 13-week forecast chart.* | M |
-| 10 | **FX hedge sizing recommender** | *As a treasurer I want a recommendation on how much USD/GBP forward to buy to keep my exposure within a tolerance.* | L |
-| 11 | **Real-time intraday view** | *As a treasurer I want to see same-day movements (received / pending / outgoing) so I can decide whether to draw RCF before 4pm cut-off.* | L |
-| 12 | **Authentication & audit log** | *As a treasury controller I want every action to be tied to a named user and timestamped so we have an audit trail.* | L |
+| 1 | **Bank statement ingestion** | *As a treasurer I want to import my bank's MT940/CAMT.053 files so the cash position reflects today's actual balances, not synthetic data.* | L |
+| 2 | **ERP invoice sync** | *As a treasurer I want open AR/AP to refresh automatically from our ERP (SAP/Oracle/Sage) so I never key invoices twice.* | L |
+| 3 | **TMS / payment platform connector** | *As a treasurer I want to push outgoing payment runs to our payment platform (Kyriba / SWIFT GPI) without manual export.* | L |
+| 4 | **FX rates from a real source** | *As a treasury controller I want EUR/USD and EUR/GBP to come from ECB or Bloomberg, not a synthetic random walk.* | S |
 
-**Acceptance-test template** (use this for whichever feature you pick
-first):
+### 8.2 — Forecast quality (better numbers)
+
+| # | Feature | User story | Effort |
+|---|---------|-----------|--------|
+| 5 | **Per-customer payment-delay learning** | *As a treasurer I want each customer's expected payment date to come from a fitted distribution on their own payment history, not a generic label.* | M |
+| 6 | **Confidence interval on the forecast** | *As a treasurer I want a P10 / P50 / P90 cone on the 13-week forecast so I see the uncertainty, not just a point estimate.* | M |
+| 7 | **Forecast accuracy by category leaderboard** | *As a treasurer I want a MAPE leaderboard per category over the last 6 vintages so I know which assumptions are drifting.* | M |
+| 8 | **Manual override line items** | *As a treasurer I want to add ad-hoc one-off lines (M&A, dividend, settlement) without editing JSON files.* | S |
+
+### 8.3 — Risk management
+
+| # | Feature | User story | Effort |
+|---|---------|-----------|--------|
+| 9 | **Customer concentration risk score** | *As a treasurer I want a Herfindahl index + top-3 share on open AR with a red-flag threshold so I monitor concentration risk.* | S |
+| 10 | **Counterparty credit-risk overlay** | *As a credit-control lead I want each customer flagged with a credit rating (e.g. Coface / Altares) so overdue AR on a downgraded counterparty is escalated.* | L |
+| 11 | **FX hedge sizing recommender** | *As a treasurer I want a recommendation on how much USD/GBP forward to buy to keep my net exposure within a tolerance band.* | L |
+| 12 | **Stress-scenario library** | *As a treasurer I want a curated library of historical shock scenarios (2008, 2020, energy 2022) I can apply with one click.* | M |
+
+### 8.4 — Workflow & alerts
+
+| # | Feature | User story | Effort |
+|---|---------|-----------|--------|
+| 13 | **DSO drift alert** | *As a credit-control lead I want a banner alert when DSO exceeds target by 5 days so I can escalate before it becomes a runway issue.* | S |
+| 14 | **AR collection worklist** | *As a credit-control lead I want a per-customer "next action" column on the Receivables page so my team has a daily worklist.* | M |
+| 15 | **Bank-fee anomaly detector** | *As a treasury controller I want any bank fee > 1.5x the trailing 12-month rolling average to be flagged automatically.* | S |
+| 16 | **Slack / Teams notification** | *As a treasurer I want a daily summary posted to my team channel: cash position, runway, top-3 events of the next 5 days.* | S |
+
+### 8.5 — Reporting & operations
+
+| # | Feature | User story | Effort |
+|---|---------|-----------|--------|
+| 17 | **PDF / Excel export for the CFO** | *As a treasurer I want a one-click "monthly board pack" PDF with the headline KPIs, the 13-week forecast chart and the scenarios summary.* | M |
+| 18 | **Cash pooling simulation** | *As a group treasurer I want to see the consolidated cash position under a notional cash pool across the four EUR accounts.* | M |
+| 19 | **Real-time intraday view** | *As a treasurer I want same-day movements (received / pending / outgoing) so I can decide whether to draw RCF before the 4pm cut-off.* | L |
+| 20 | **Authentication & audit log** | *As a treasury controller I want every action tied to a named user and timestamped, with a downloadable audit trail.* | L |
+
+### 8.6 — Acceptance-test template (use this for any feature you pick)
 
 ```
 GIVEN   <starting state of the app — which page, which data>
@@ -279,19 +311,156 @@ THEN    <the observable result — a value shown, a chart updated,
 AND     <a measurable, falsifiable secondary check>
 ```
 
-Example for #2 (DSO drift alert):
+Worked example for #13 (DSO drift alert):
 
-> GIVEN the app is open on the Dashboard with `dso_target_days = 52`
-> WHEN the computed DSO is ≥ 57
-> THEN a red banner appears at the top of the Dashboard
-> AND the banner text shows the current DSO and the absolute drift in days
+> **GIVEN** the Dashboard is open with `assumptions.json → drivers.dso_target_days = 52`
+> **WHEN** the computed DSO is ≥ 57 days (target + 5)
+> **THEN** a red banner appears at the top of the Dashboard
+> **AND** the banner text shows the current DSO and the absolute drift in days
+> **AND** the banner disappears immediately when DSO drops back below 57
 
-That's already a unit-test specification. A developer (or the AI you
-prompt) can ship it without ambiguity.
+That's a unit-test specification. A developer (or the AI you prompt) can
+ship it without ambiguity. This is also exactly what you paste into the
+"Acceptance criteria" field of the GitHub issue (next section).
 
 ---
 
-## 9. How to run it (you do not need to be a developer)
+## 9. Propose an update — file a GitHub issue
+
+Once you've picked a feature (or spotted a bug, or found a number that
+doesn't match your reference), the right next step is to **open an
+issue** on this repository. Issues are the unit of conversation between
+treasury (you) and engineering (or the AI you prompt). A well-written
+issue can be picked up and shipped without a single follow-up question;
+a bad one bounces back and forth for days.
+
+### 9.1 — The three templates available
+
+This repository ships three issue templates in
+[`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE). When you click
+*New issue* on GitHub, you will be offered a choice:
+
+| Template | Use it when… |
+|----------|--------------|
+| 🟢 **Feature request (treasury PO)** | You want a new KPI, page, slider, alert, export — anything that adds capability. |
+| 🔴 **Bug report** | A number, a chart, or a behaviour is wrong, missing, or crashes. |
+| 🟡 **Data question** | A number is technically computed correctly but doesn't match what *you* would have computed from the underlying data. Often the methodology answer, sometimes a real bug in disguise. |
+
+If your need doesn't fit any of these three, file a **feature request**
+and tag it with whatever extra context you have. Don't write a free-form
+issue — the templates exist to keep treasurers from forgetting the
+acceptance criteria.
+
+### 9.2 — Step-by-step: how to file an issue (5 minutes)
+
+1. **Go to the repo on GitHub** → `Issues` tab → green button `New issue`.
+2. **Pick the template** that matches your case (above).
+3. **Fill in the template top-to-bottom**. Don't skip the acceptance
+   criteria — it's the most important part. If you don't have one, you
+   don't have a feature, you have a wish.
+4. **Attach a screenshot** if you're talking about something visible.
+   Drag-and-drop into the issue body — GitHub uploads it for you.
+5. **Pick labels**. Templates pre-apply `enhancement`, `bug`, or
+   `question`. Add `treasury-priority/high|medium|low` if you've agreed
+   with your team on prioritisation, and `area/dashboard|forecast|ar-ap|…`
+   to flag the surface.
+6. **Submit**. The issue appears in the project board. Either a
+   developer picks it up, or you (or your facilitator) drop the issue
+   text into Claude Code as a prompt and ship it yourself.
+
+### 9.3 — Worked example (filled-in feature request)
+
+Here's what backlog item #13 (DSO drift alert) looks like as a finished
+GitHub issue. This is exactly the level of detail you want to aim for.
+
+```markdown
+**Title**: [Feature] DSO drift alert on Dashboard
+
+### What treasury question are you trying to answer?
+We currently spot DSO drift only when the monthly board pack is built —
+~2 weeks of lag. We need a same-day signal so credit-control can
+escalate before runway is impacted.
+
+### Acceptance criteria
+GIVEN the Dashboard is open with `assumptions.json → drivers.dso_target_days = 52`
+WHEN the computed DSO is ≥ 57 days (target + 5)
+THEN a red banner appears at the top of the Dashboard
+AND the banner text shows the current DSO and the absolute drift in days
+AND the banner disappears immediately when DSO drops back below 57
+
+### Where in the app?
+- [x] Dashboard
+- [ ] Forecast
+- [ ] Scenarios
+- [ ] Receivables / Payables
+- [ ] Bank Accounts
+- [ ] Variance
+- [ ] New page
+
+### Data needed
+- `data/ar_invoices.csv` (already loaded by `src/data_loader.load_ar()`)
+- `data/assumptions.json → drivers.dso_target_days`
+- DSO already computed by `src/metrics.dso(ar, today)`
+
+### Effort estimate
+- [x] S — under an hour for someone who knows the codebase
+- [ ] M — half a day
+- [ ] L — full sprint
+
+### Why now?
+Q2 review showed our DSO drifted 3 days vs target without anyone
+noticing for 6 weeks. The cost in working capital was ~€450k. A
+real-time alert would have caught it in the first 5 days.
+
+### References
+- `docs/METHODOLOGY.md` §6 (DSO formula)
+- `docs/USER_GUIDE.md` §09:00 (the dashboard reading routine)
+```
+
+Notice: the issue could be implemented from this content alone, with
+zero follow-up questions. That is the bar.
+
+### 9.4 — What makes a good issue (the 5 do's)
+
+1. **Specific title.** *"DSO drift alert on Dashboard"* not *"improve
+   alerts"*.
+2. **Acceptance criteria, not description.** A spec that's testable,
+   not a paragraph of intent.
+3. **Reference the data.** Name the file, the column, the existing
+   function. *"Use `src.metrics.dso`"* saves the developer 20 minutes.
+4. **Justify the priority.** Quantify the cost of *not* doing it (lost
+   working capital, missed buffer breach, audit finding). One sentence
+   is enough.
+5. **One issue, one feature.** *"Add DSO alert and rebuild the
+   variance page"* is two issues. Split them.
+
+### 9.5 — What makes a bad issue (the 4 don'ts)
+
+1. **"Improve the dashboard"** — no scope, no test. Closed in 24h.
+2. **"Add ML"** — buzzword, no problem statement.
+3. **"This is wrong"** — without saying what was expected.
+4. **A 2-page novel** — a developer reads the first 5 lines. Lead
+   with the acceptance criteria.
+
+### 9.6 — Triage flow (what happens after you submit)
+
+| Stage | Label | What it means |
+|-------|-------|----------------|
+| Just filed | `needs-triage` | Awaiting review by the maintainer / treasury committee. |
+| Validated | `accepted` | Will be picked up; priority assigned. |
+| In progress | `in-progress` | Someone is working on it. Branch usually linked. |
+| Ready for PO review | `awaiting-po-review` | Implementation done, **you** validate the acceptance criteria. |
+| Shipped | `closed` | Merged + deployed. Linked PR in the comments. |
+| Won't ship | `wont-fix` | Out of scope or duplicate. Maintainer explains why. |
+
+Your job as PO doesn't end at filing the issue: when it reaches
+`awaiting-po-review`, you **open the app, run the acceptance test from
+your own issue, and either approve or reopen with comments**. That
+closing of the loop is what makes the next ten issues you file faster.
+
+---
+
+## 10. How to run it (you do not need to be a developer)
 
 ```bash
 # install (one-time)
@@ -328,7 +497,7 @@ seed is deterministic (`SEED = 42`); change it for a fresh personality.
 
 ---
 
-## 10. Where to go next in this repo
+## 11. Where to go next in this repo
 
 Once you've internalised this README, the deeper docs are:
 
@@ -347,7 +516,7 @@ Once you've internalised this README, the deeper docs are:
 
 ---
 
-## 11. Project layout (one screen)
+## 12. Project layout (one screen)
 
 ```
 .
@@ -357,6 +526,7 @@ Once you've internalised this README, the deeper docs are:
 ├── data/                        # Synthetic CSV + assumptions.json
 ├── docs/                        # All the docs you'd want as a PO
 ├── tools/                       # Build scripts (HTML preview)
+├── .github/ISSUE_TEMPLATE/      # Templates for filing issues (PO-friendly)
 └── requirements.txt
 ```
 
@@ -365,7 +535,7 @@ change policy) and `data/generate_data.py` (to change the company shape).
 
 ---
 
-## 12. Caveats
+## 13. Caveats
 
 This is a **demo / educational** project. Helios Industries SA, every
 customer, every supplier, every IBAN, every euro amount is fictional.

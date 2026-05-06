@@ -30,6 +30,7 @@ def main() -> None:
     st.caption(
         "Group cash-flow forecasting · base currency EUR · "
         "data refreshed " + dl.today().isoformat()
+        + "  ·  🏦 a BNP Paribas Cash Management treasurer-education demo"
     )
 
     assumptions = dl.load_assumptions()

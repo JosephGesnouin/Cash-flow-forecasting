@@ -1,5 +1,12 @@
 # Helios Industries SA — Cash-Flow Forecasting
 
+> 🏦 **A treasurer-education demo by BNP Paribas Cash Management.**
+> Built to train junior treasurers and product owners on how a modern
+> short-term cash-flow forecasting tool works, what assumptions sit
+> underneath it, and how to specify the next features. The fictional
+> client *Helios Industries SA* mirrors the profile of a typical BNP
+> Paribas Cash Management mid-cap industrial customer.
+
 > **You're the Product Owner.** You opened this repo because someone is
 > going to ask you, in the next few weeks, *"what should we build into our
 > treasury cash-flow tool?"*. This README is written to put you in the
@@ -39,7 +46,8 @@ it.
 
 To make the numbers feel real, the app tells the story of a believable
 mid-cap industrial group. None of the names are real, but the *shape* is
-typical of what you'd find on the books of a French ETI:
+typical of what you'd find on the books of a French ETI in the BNP
+Paribas Cash Management book:
 
 - **Sector**: industrial manufacturing, EUR base currency.
 - **Annual revenue**: ~€80M, growing ~4.5% YoY.
@@ -535,14 +543,19 @@ change policy) and `data/generate_data.py` (to change the company shape).
 
 ---
 
-## 13. Caveats
+## 13. Caveats & provenance
 
-This is a **demo / educational** project. Helios Industries SA, every
-customer, every supplier, every IBAN, every euro amount is fictional.
-Do not use this app to run real treasury decisions. Do use it to
-prototype, to teach, to onboard juniors, and — most usefully — to write
-specifications for the real tool you'll commission next.
+This is a **demo / educational** project produced by **BNP Paribas Cash
+Management** for treasurer-education sessions. Helios Industries SA,
+every customer, every supplier, every IBAN, every euro amount is
+fictional. Do not use this app to run real treasury decisions. Do use
+it to prototype, to teach, to onboard juniors, and — most usefully —
+to write specifications for the real tool you'll commission next.
 
 The numbers above (cash €18.28M, runway 2.8 months, DSO 55, etc.) are
 pinned to the reference date 2026-05-05 and the deterministic seed. They
 will shift if you regenerate.
+
+> The app deliberately shows a multi-bank setup (BNP Paribas, Deutsche
+> Bank, NatWest, Citibank, HSBC). Real corporate treasuries are
+> multi-banked and a credible demo has to reflect that.

@@ -1,5 +1,7 @@
 # Workshop — 45 minutes, 2 facilitators, 30 treasurers in the room
 
+> 🏦 *A BNP Paribas Cash Management treasurer-education session.*
+>
 > Goal: every treasurer leaves saying *"I can do this on my phone on
 > Monday morning."* The constraint: only **one** Claude Code access, on a
 > phone. No team laptops. The asset: **two** facilitators in the room
@@ -236,11 +238,15 @@ supports each but does not run any of them.
 
 ## 9. Opening pitch (HOST script — 4 minutes)
 
-> *"Welcome. In front of you: a treasury app for a fictional industrial
-> group — Helios Industries. Eight bank accounts in three currencies. €38
-> million of open AR, €13 million of open AP. A 13-week direct cash
-> forecast. Three stress scenarios. The whole thing was built in two
-> hours by an AI controlled by a human typing what they wanted."*
+> *"Welcome. This is a BNP Paribas Cash Management session — our
+> treasurer-education series, focused today on what AI changes for the
+> way you build your own treasury tools. In front of you: a cash-flow
+> forecasting app for a fictional industrial group — Helios Industries —
+> whose profile is modelled on a typical mid-cap in our Cash Management
+> book. Eight bank accounts in three currencies. €38 million of open
+> AR, €13 million of open AP. A 13-week direct cash forecast. Three
+> stress scenarios. The whole thing was built in two hours by an AI
+> controlled by a human typing what they wanted."*
 >
 > *"Today is not a demo. We are two facilitators. My colleague has the
 > phone — that's our entire development team. I have the microphone —

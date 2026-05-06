@@ -1,7 +1,9 @@
 # Project report — Cash-Flow Forecasting application
 
-> Author: built by Claude (Opus 4.7) under a "vibe-coding" prompt from a
+> 🏦 Produced by **BNP Paribas Cash Management** as a treasurer-education
+> demo. Built by Claude (Opus 4.7) under a "vibe-coding" prompt from a
 > corporate-treasury angle.
+>
 > Branch: `claude/cash-flow-forecasting-app-3fl9v`
 > Date: 2026-05-05
 

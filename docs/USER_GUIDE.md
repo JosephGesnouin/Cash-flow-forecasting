@@ -1,5 +1,7 @@
 # User guide — a treasurer's walk-through
 
+> 🏦 *A BNP Paribas Cash Management treasurer-education asset.*
+
 This document mirrors the workflow of a real corporate treasurer using the
 app on a typical Monday morning.
 
